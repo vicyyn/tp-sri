@@ -8,6 +8,14 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from collections import Counter
+import shutil
+
+def classify_and_store(file_path, classification):
+    base_path = "classified_documents"
+    for criterion, value in classification.items():
+        destination = os.path.join(base_path, criterion, value)
+        os.makedirs(destination, exist_ok=True)
+        shutil.copy(file_path, destination)
 
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -113,6 +121,13 @@ def process_document(file_path):
     manual_tags = input("Enter manual tags for this document, separated by commas: ").split(',')
     metadata = extract_metadata(file_path)
     index_and_store(file_path, text, metadata, keywords, manual_tags)
+
+    classification = {
+        'year': str(metadata[0].year),
+        'keyword': keywords[0]  # assuming you want to classify by the most common keyword
+    }
+    classify_and_store(file_path, classification)
+
     print(f"Document indexed: {file_path}")
 
 # Wait for User Input
