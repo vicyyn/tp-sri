@@ -114,11 +114,11 @@ def process_document(file_path):
         text = extract_text_from_txt(file_path)
     else:
         text = 'Unsupported format'
+    manual_tags = input("Enter manual tags for this document, separated by commas: ").split(',')
 
     # Extract keywords
     keywords = extract_keywords(text)
     # Manual indexing
-    manual_tags = input("Enter manual tags for this document, separated by commas: ").split(',')
     metadata = extract_metadata(file_path)
     index_and_store(file_path, text, metadata, keywords, manual_tags)
 
