@@ -1,0 +1,15 @@
+sequenceDiagram
+  participant User
+  participant DocumentProcessing
+  participant FileSystem
+  participant Database
+
+  User ->> DocumentProcessing: index()
+  DocumentProcessing ->> User: input("Enter manual tags...")
+  DocumentProcessing ->> FileSystem: file_path
+  FileSystem -->> DocumentProcessing: file data
+  DocumentProcessing ->> FileSystem: extract_metadata(file_path)
+  DocumentProcessing ->> Database: index_and_store(file_path, text, metadata, keywords, manual_tags)
+  DocumentProcessing ->> FileSystem: classify_and_store(file_path, classification)
+  User ->> Database: view()
+  Database -->> User: data
