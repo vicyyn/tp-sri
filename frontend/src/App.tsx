@@ -7,7 +7,7 @@ import { useDispatch } from "./Thunk";
 import { useEffect } from "react";
 import { dispatchDocuments, dispatchIndexes } from "./Reducer";
 import { toast } from "react-toastify";
-import { API_PATH } from "./Consts";
+import { API_PATH } from "./consts";
 
 function App() {
   

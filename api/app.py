@@ -62,17 +62,17 @@ def documents():
 
 @app.route('/indexes', methods=['GET'])
 def indexes():
-  db.create_all()
+  print(index_manager.dataIndex)
   return jsonify(index_manager.dataIndex)
 
 @app.route('/search', methods=['POST'])
 def search_docs():
-  query = request.form.get('query')
-  print(index_manager.dataIndex)
-  transformed_query = query_evaluator.filter_index(query, index_manager.dataIndex)
-  print(transformed_query)
-  paths = list(set([doc['filePath'] for doc in transformed_query]))
-  return jsonify([Document.to_json(document) for document in Document.query.filter(Document.path.in_(paths)).all()])
+    query = request.form.get('query')
+    transformed_query = query_evaluator.filter_index(query, index_manager.dataIndex)
+    # If transformed_query is already a list of file paths, no need for list comprehension
+    paths = list(set(transformed_query))
+    # Fetch documents from the database whose paths are in the transformed_query
+    return jsonify([Document.to_json(document) for document in Document.query.filter(Document.path.in_(paths)).all()])
 
 @app.route('/indexes', methods=['POST'])
 def updateIndex():
@@ -110,10 +110,8 @@ def updateIndex():
 
 # Main
 if __name__ == '__main__':
-    # Ensure that the database and tables are created
-    with app.app_context():
-        db.create_all()
-
     # Run the Flask application
+    with app.app_context():
+      db.create_all()
     app.run(debug=True, host='0.0.0.0', port=8000)
 

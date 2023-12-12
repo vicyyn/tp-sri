@@ -30,7 +30,9 @@ class IndexManager:
     def extractTextFromImage(self, imagePath: str) -> str:
         try:
             image = Image.open(imagePath)
-            return pytesseract.image_to_string(image)
+            output = pytesseract.image_to_string(image)
+            print(output)
+            return output
         except Exception as e:
             print(f"Error during OCR: {str(e)}")
             return ""
@@ -41,7 +43,7 @@ class IndexManager:
         self.dataIndex[category][value].append(doc.path)
 
     def processDocumentContent(self, doc) -> None:
-        content = self.extractTextFromImage(doc.path) if "image" in doc.type else self.readDocument(doc.path)
+        content = self.extractTextFromImage(doc.path) if "png" in doc.type else self.readDocument(doc.path)
         self.indexContent(content, doc.path)
 
     def readDocument(self, filePath: str) -> str:

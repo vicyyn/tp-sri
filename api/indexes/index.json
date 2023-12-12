@@ -1,1 +1,12 @@
-{"category": {"text": ["./documents/test.txt"], "image": ["./documents/test.txt", "./documents/test.txt", "./documents/text2.txt"]}, "content": {"test": [{"filePath": "./documents/test.txt", "occurrences": 1}, {"filePath": "./documents/test.txt", "occurrences": 1}, {"filePath": "./documents/test.txt", "occurrences": 1}], "file": [{"filePath": "./documents/test.txt", "occurrences": 1}, {"filePath": "./documents/test.txt", "occurrences": 1}, {"filePath": "./documents/test.txt", "occurrences": 1}], "image": [{"filePath": "./documents/text2.txt", "occurrences": 1}]}, "date": {"2023-12-12": ["./documents/test.txt", "./documents/test.txt", "./documents/test.txt", "./documents/text2.txt"]}, "keywords": {"nader": ["./documents/test.txt"], "file": ["./documents/test.txt"], "random": ["./documents/test.txt", "./documents/test.txt", "./documents/text2.txt"], "text": ["./documents/test.txt", "./documents/test.txt", "./documents/text2.txt"]}, "language": {"en": ["./documents/test.txt", "./documents/test.txt", "./documents/test.txt", "./documents/text2.txt"]}, "name": {"test": ["./documents/test.txt", "./documents/test.txt", "./documents/test.txt"], "text2": ["./documents/text2.txt"]}, "size": {"21": ["./documents/test.txt", "./documents/test.txt", "./documents/test.txt"], "17": ["./documents/text2.txt"]}, "type": {"text/plain": ["./documents/test.txt", "./documents/test.txt", "./documents/test.txt", "./documents/text2.txt"]}, "time": {"20:26:19": ["./documents/test.txt"], "20:26:59": ["./documents/test.txt"], "20:27:00": ["./documents/test.txt"], "20:27:23": ["./documents/text2.txt"]}, "ext": {"txt": ["./documents/test.txt", "./documents/test.txt", "./documents/test.txt", "./documents/text2.txt"]}}
+{
+  "category": {},
+  "content": {},
+  "date": {},
+  "keywords": {},
+  "language": {},
+  "name": {},
+  "size": {},
+  "type": {},
+  "time": {},
+  "ext": {}
+}

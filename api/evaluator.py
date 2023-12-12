@@ -4,19 +4,78 @@ from boolean_parser import parse
 class QueryEvaluator:
     def __init__(self):
         self.operator_mapping = {
-            '=': 'equal',
-            '>': 'greater_than',
-            '<': 'less_than',
-            '>=': 'greater_than_or_equal',
-            '<=': 'less_than_or_equal',
-            '!=': 'not_equal'
+            '=': 'check_equal',
+            '>': 'check_greater',
+            '<': 'check_less',
+            '>=': 'check_greater_equal',
+            '<=': 'check_less_equal',
+            '!=': 'check_not_equal'
         }
 
-    def _is_function_call(self, text):
+    def check_equal(self, field, value, index):
+        return index.get(field, {}).get(value, [])
+
+    def check_not_equal(self, field, value, index):
+        result = []
+        for key, paths in index.get(field, {}).items():
+            if key != value:
+                result.extend(paths)
+        return result
+
+    def convert_key_type(self, key, value):
+        """
+        Convert the key to the same type as the value for comparison,
+        if possible. Otherwise, return the original key.
+        """
+        if isinstance(value, int):
+            try:
+                return int(key)
+            except ValueError:
+                return key
+        elif isinstance(value, float):
+            try:
+                return float(key)
+            except ValueError:
+                return key
+        return key
+
+    def check_less(self, field, value, index):
+        result = []
+        for key, paths in index.get(field, {}).items():
+            converted_key = self.convert_key_type(key, value)
+            if converted_key < value:
+                result.extend(paths)
+        return result
+
+    def check_greater(self, field, value, index):
+        result = []
+        for key, paths in index.get(field, {}).items():
+            converted_key = self.convert_key_type(key, value)
+            if converted_key > value:
+                result.extend(paths)
+        return result
+
+    def check_less_equal(self, field, value, index):
+        result = []
+        for key, paths in index.get(field, {}).items():
+            converted_key = self.convert_key_type(key, value)
+            if converted_key <= value:
+                result.extend(paths)
+        return result
+
+    def check_greater_equal(self, field, value, index):
+        result = []
+        for key, paths in index.get(field, {}).items():
+            converted_key = self.convert_key_type(key, value)
+            if converted_key >= value:
+                result.extend(paths)
+        return result
+
+    def is_function_call(self, text):
         pattern = r'(\w+)\((.*)\)'
         return re.match(pattern, text)
 
-    def _parse_arguments(self, args_string):
+    def parse_function_args(self, args_string):
         arguments, current_arg, paren_count = [], '', 0
 
         for char in args_string:
@@ -31,19 +90,19 @@ class QueryEvaluator:
                 current_arg += char
 
         arguments.append(current_arg.strip())
-        return list(map(self._process_argument, arguments))
+        return list(map(self.process_function_argument, arguments))
 
-    def _get_function_details(self, func_string):
-        match = self._is_function_call(func_string)
+    def get_function_details(self, func_string):
+        match = self.is_function_call(func_string)
 
         if match:
             name, args_string = match.group(1), match.group(2)
-            args = self._parse_arguments(args_string) if args_string else []
+            args = self.parse_function_args(args_string) if args_string else []
             return name, args
         else:
             return func_string
 
-    def _transform_expression(self, expr):
+    def transform_query_expression(self, expr):
         operand1, operator, operand2 = "", "", ""
         for char in expr:
             if char.isalnum() or char == ' ':
@@ -60,25 +119,21 @@ class QueryEvaluator:
         else:
             return expr
 
-    def _process_argument(self, arg):
-        if self._is_function_call(arg):
-            return self._get_function_details(arg)
+    def process_function_argument(self, arg):
+        if self.is_function_call(arg):
+            return self.get_function_details(arg)
         else:
-            return self._get_function_details(self._transform_expression(arg))
+            return self.get_function_details(self.transform_query_expression(arg))
 
-    # Implement the comparison functions (equal, not_equal, greater_than, etc.)
-    # ...
-
-    def evaluate_query(self, query, index):
+    def execute_query(self, query, index):
         query_function = getattr(self, query[0], lambda *args: [])
         return query_function(*query[1], index)
 
-    def filter_index(self, query_str, index):
+    def apply_index_filter(self, query_str, index):
         parsed_query = str(parse(query_str))
-        transformed_query = self._process_argument(parsed_query)
-        return self.evaluate_query(transformed_query, index)
-
+        transformed_query = self.process_function_argument(parsed_query)
+        return self.execute_query(transformed_query, index)
 
 # Example Usage
 # evaluator = QueryEvaluator()
-# result = evaluator.filter_index("query", index)
+# result = evaluator.apply_index_filter("query", index)
