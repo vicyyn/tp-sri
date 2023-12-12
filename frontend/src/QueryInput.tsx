@@ -35,9 +35,14 @@ const SearchQueryInput = () => {
 
   return (
     <div>
-      <Form.Group className="mb-3">
+      <Form.Group className="mb-3" style={{
+        background: "#444"
+      }}>
         <Form.Label>Query</Form.Label>
-        <Form.Control
+        <Form.Control style={{
+        background: "#444",
+        color: "#fff"
+      }}
           as="textarea"
           rows={3}
           onChange={handleInputChange}

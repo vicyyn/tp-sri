@@ -50,7 +50,7 @@ export default function Indexes() {
 
   return (
     <>
-        <Stack gap={3} style={{ marginTop: '3rem', marginBottom: '3rem', display: 'flex' }}>
+        <Stack  >
       <Container
         style={{
           display: 'flex',
@@ -62,7 +62,9 @@ export default function Indexes() {
         }}
       >
         <h4>Documents</h4>
-        <Button onClick={() => setShow(true)}>Add a document</Button>
+        <Button onClick={() => setShow(true)} style={{
+          width: "100%"
+        }}>Add a document</Button>
       </Container>
       <FileList documents={documents} />
 
@@ -81,6 +83,50 @@ export default function Indexes() {
  </div>
       </div>
     </Stack>
+    <Modal show={show} onHide={() => setShow(false)} >
+        <Modal.Header closeButton style={{
+                background:"#444",
+                color: "#fff"
+              }}>
+          <Modal.Title>Add a document</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{
+                background:"#444",
+                color: "#fff"
+              }}>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Document</Form.Label>
+              <Form.Control type="file" name="document" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Category</Form.Label>
+              <Form.Control type="text" name="category" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Language</Form.Label>
+              <Form.Control type="text" name="language" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Keywords (separated by ",")</Form.Label>
+              <Form.Control as="textarea" rows={2} name="keywords" />
+            </Form.Group>
+            <Container
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "end",
+              }}
+            >
+              <Button variant="primary" type="submit" style={{
+                width: "100%"
+              }}>
+                Submit
+              </Button>
+            </Container>
+          </Form>
+        </Modal.Body>
+      </Modal>
      
     </>
   );

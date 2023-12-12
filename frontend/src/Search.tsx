@@ -17,19 +17,8 @@ export default function SearchEngine() {
     <Stack style={{ marginTop: "5rem", color: "#fff" }} gap={5}>
       <Row>
        
-          <h5 style={{ color: "#fff" }}>Search parameters</h5>
-          <Stack>
-            <span style={{ color: "#fff" }}>name</span>
-            <span style={{ color: "#fff" }}>ext</span>
-            <span style={{ color: "#fff" }}>type</span>
-            <span style={{ color: "#fff" }}>category</span>
-            <span style={{ color: "#fff" }}>date</span>
-            <span style={{ color: "#fff" }}>time</span>
-            <span style={{ color: "#fff" }}>size</span>
-            <span style={{ color: "#fff" }}>language</span>
-            <span style={{ color: "#fff" }}>keywords</span>
-            <span style={{ color: "#fff" }}>content</span>
-          </Stack>
+          <h5 style={{ color: "#fff" }}>Search parameters : name,ext,type,category,date,time,size;language,keywords,contents</h5>
+          
        
        
           <SearchQueryInput />
