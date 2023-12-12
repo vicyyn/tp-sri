@@ -1,3 +1,4 @@
+import React from "react";
 import { Table } from "react-bootstrap";
 import type { Document } from "./Reducer";
 
@@ -20,18 +21,18 @@ const FileDisplayer = ({ documents }: { documents: Document[] }) => {
 
   return (
     <>
-      <Table striped bordered hover>
+      <Table striped bordered hover style={{ background: "#333", color: "#fff" }}>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Ext</th>
-            <th>Type</th>
-            <th>Category</th>
-            <th>Date Time</th>
-            <th>Size</th>
-            <th>Language</th>
-            <th>Keywords</th>
-            <th>Path</th>
+            <th style={{ background: "#444", color: "#fff", padding: "8px" }}>Name</th>
+            <th style={{ background: "#444", color: "#fff", padding: "8px" }}>Ext</th>
+            <th style={{ background: "#444", color: "#fff", padding: "8px" }}>Type</th>
+            <th style={{ background: "#444", color: "#fff", padding: "8px" }}>Category</th>
+            <th style={{ background: "#444", color: "#fff", padding: "8px" }}>Date Time</th>
+            <th style={{ background: "#444", color: "#fff", padding: "8px" }}>Size</th>
+            <th style={{ background: "#444", color: "#fff", padding: "8px" }}>Language</th>
+            <th style={{ background: "#444", color: "#fff", padding: "8px" }}>Keywords</th>
+            <th style={{ background: "#444", color: "#fff", padding: "8px" }}>Path</th>
           </tr>
         </thead>
         <tbody>
@@ -50,7 +51,7 @@ const FileDisplayer = ({ documents }: { documents: Document[] }) => {
           ))}
         </tbody>
       </Table>
-      {documents.length == 0 && (
+      {documents.length === 0 && (
         <div
           style={{
             display: "flex",
@@ -59,6 +60,8 @@ const FileDisplayer = ({ documents }: { documents: Document[] }) => {
             marginTop: "-1rem",
             border: "0.5px solid #dee2e6",
             borderTop: "0px solid white",
+            background: "#333",
+            color: "#fff",
           }}
         >
           No Documents

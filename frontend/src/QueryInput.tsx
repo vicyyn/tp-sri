@@ -45,7 +45,9 @@ const SearchQueryInput = () => {
         />
       </Form.Group>
       <Form.Group className="mb-3 d-flex algin-items-center justify-content-end">
-        <Button onClick={handleSearch}>Search</Button>
+        <Button onClick={handleSearch} style={{
+          width: "100%"
+        }}>Search</Button>
       </Form.Group>
     </div>
   );

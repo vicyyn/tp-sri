@@ -1,8 +1,8 @@
+import React, { useEffect } from "react";
 import { Col, Row, Stack } from "react-bootstrap";
 import SearchQueryInput from "./QueryInput";
 import FileDisplayer from "./Displayer";
 import { useDispatch, useSelector } from "./Thunk";
-import { useEffect } from "react";
 import { dispatchSearchResult } from "./Reducer";
 
 export default function SearchEngine() {
@@ -14,26 +14,26 @@ export default function SearchEngine() {
   }, []);
 
   return (
-    <Stack style={{ marginTop: "5rem" }} gap={5}>
+    <Stack style={{ marginTop: "5rem", color: "#fff" }} gap={5}>
       <Row>
-        <Col xs={4}>
-          <h5>Search params</h5>
+       
+          <h5 style={{ color: "#fff" }}>Search parameters</h5>
           <Stack>
-            <span>name</span>
-            <span>ext</span>
-            <span>type</span>
-            <span>category</span>
-            <span>date</span>
-            <span>time</span>
-            <span>size</span>
-            <span>language</span>
-            <span>keywords</span>
-            <span>content</span>
+            <span style={{ color: "#fff" }}>name</span>
+            <span style={{ color: "#fff" }}>ext</span>
+            <span style={{ color: "#fff" }}>type</span>
+            <span style={{ color: "#fff" }}>category</span>
+            <span style={{ color: "#fff" }}>date</span>
+            <span style={{ color: "#fff" }}>time</span>
+            <span style={{ color: "#fff" }}>size</span>
+            <span style={{ color: "#fff" }}>language</span>
+            <span style={{ color: "#fff" }}>keywords</span>
+            <span style={{ color: "#fff" }}>content</span>
           </Stack>
-        </Col>
-        <Col xs={8}>
+       
+       
           <SearchQueryInput />
-        </Col>
+      
       </Row>
       <Row>
         <FileDisplayer documents={searchResult} />

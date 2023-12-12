@@ -1,0 +1,32 @@
+/* Global Styles */
+body {
+    background-color: #282c34; /* Dark background color */
+    color: #ffffff; /* Light text color */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Table Styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    color: #ffffff; /* Light text color for table content */
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #555555; /* Dark border color between table rows */
+  }
+  
+  th {
+    background-color: #444444; /* Dark background color for table header */
+    color: #ffffff; /* Light text color for table header */
+  }
+  
+  /* Hover effect for table rows */
+  tr:hover {
+    background-color: #333333; /* Dark background color on hover */
+  }

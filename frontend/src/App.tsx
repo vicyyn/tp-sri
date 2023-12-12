@@ -1,9 +1,7 @@
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import { LinkContainer } from "react-router-bootstrap";
+
 import { useRoutes } from "react-router-dom";
-import Indexes from "./indexes";
+import Indexes from "./Indexes";
 import SearchEngine from "./Search";
 import { useDispatch } from "./Thunk";
 import { useEffect } from "react";
@@ -12,16 +10,7 @@ import { toast } from "react-toastify";
 import { API_PATH } from "./Consts";
 
 function App() {
-  const content = useRoutes([
-    {
-      path: "",
-      element: <Indexes />,
-    },
-    {
-      path: "search-engine",
-      element: <SearchEngine />,
-    },
-  ]);
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,24 +35,15 @@ function App() {
 
   return (
     <>
-      <Navbar expand="lg" style={{ backgroundColor: "#e3f2fd" }}>
-        <Container>
-          <Navbar.Brand>TP SRI</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse>
-            <Nav className="me-auto">
-              <LinkContainer to="">
-                <Nav.Link>Indexes</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/search-engine">
-                <Nav.Link>Search Engine</Nav.Link>
-              </LinkContainer>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      
 
-      <Container>{content}</Container>
+      <Container>
+        <Indexes>
+        </Indexes>
+        <SearchEngine>
+
+        </SearchEngine>
+        </Container>
     </>
   );
 }

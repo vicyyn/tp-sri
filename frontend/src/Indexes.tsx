@@ -50,81 +50,38 @@ export default function Indexes() {
 
   return (
     <>
-      <Stack gap={3} style={{ marginTop: "3rem", marginBottom: "3rem" }}>
-        <Row>
-          <Container
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginBottom: "0.5rem",
-            }}
-          >
-            <h4>Documents</h4>
-            <Button onClick={() => setShow(true)}>Add a document</Button>
-          </Container>
-          <FileList documents={documents} />
-        </Row>
-        <Row>
-          <Container style={{ marginBottom: "0.5rem" }}>
-            <h4>Indexes</h4>
-          </Container>
-          <Accordion>
-            {Object.keys(indexes)
-              .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
-              .map((key, index) => (
-                <Accordion.Item eventKey={index.toLocaleString()} key={key}>
-                  <Accordion.Header>{key.toUpperCase()} INDEX</Accordion.Header>
-                  <Accordion.Body>
-                    <pre>
-                      <code>
-                        {
-                          JSON.stringify(indexes[key], null, 2)
-                        }
-                      </code>
-                    </pre>
-                  </Accordion.Body>
-                </Accordion.Item>
-              ))}
-          </Accordion>
-        </Row>
-      </Stack>
-      <Modal show={show} onHide={() => setShow(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add a document</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>Document</Form.Label>
-              <Form.Control type="file" name="document" />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Category</Form.Label>
-              <Form.Control type="text" name="category" />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Language</Form.Label>
-              <Form.Control type="text" name="language" />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Keywords (separated by ",")</Form.Label>
-              <Form.Control as="textarea" rows={2} name="keywords" />
-            </Form.Group>
-            <Container
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "end",
-              }}
-            >
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            </Container>
-          </Form>
-        </Modal.Body>
-      </Modal>
+        <Stack gap={3} style={{ marginTop: '3rem', marginBottom: '3rem', display: 'flex' }}>
+      <Container
+        style={{
+          display: 'flex',
+        
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          justifyContent: 'space-between',
+          marginRight: '10px', // Add margin for spacing
+        }}
+      >
+        <h4>Documents</h4>
+        <Button onClick={() => setShow(true)}>Add a document</Button>
+      </Container>
+      <FileList documents={documents} />
+
+      <Container
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+        }}
+      >
+        <h4>Indexes</h4>
+      </Container>
+      <div>
+      <div>
+  {JSON.stringify(indexes, null, 2)}
+ </div>
+      </div>
+    </Stack>
+     
     </>
   );
 }
