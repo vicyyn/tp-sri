@@ -22,52 +22,31 @@ class QueryEvaluator:
                 result.extend(paths)
         return result
 
-    def convert_key_type(self, key, value):
-        """
-        Convert the key to the same type as the value for comparison,
-        if possible. Otherwise, return the original key.
-        """
-        if isinstance(value, int):
-            try:
-                return int(key)
-            except ValueError:
-                return key
-        elif isinstance(value, float):
-            try:
-                return float(key)
-            except ValueError:
-                return key
-        return key
-
     def check_less(self, field, value, index):
         result = []
         for key, paths in index.get(field, {}).items():
-            converted_key = self.convert_key_type(key, value)
-            if converted_key < value:
+            if int(key) < int(value):
                 result.extend(paths)
         return result
 
     def check_greater(self, field, value, index):
         result = []
         for key, paths in index.get(field, {}).items():
-            converted_key = self.convert_key_type(key, value)
-            if converted_key > value:
+            if int(key) > int(value):
                 result.extend(paths)
         return result
 
     def check_less_equal(self, field, value, index):
         result = []
         for key, paths in index.get(field, {}).items():
-            converted_key = self.convert_key_type(key, value)
-            if converted_key <= value:
+            if int(key) <= int(value):
                 result.extend(paths)
         return result
 
     def check_greater_equal(self, field, value, index):
         result = []
         for key, paths in index.get(field, {}).items():
-            converted_key = self.convert_key_type(key, value)
-            if converted_key >= value:
+            if int(key) >= int(value):
                 result.extend(paths)
         return result
 

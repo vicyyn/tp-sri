@@ -1,12 +1,1 @@
-{
-  "category": {},
-  "content": {},
-  "date": {},
-  "keywords": {},
-  "language": {},
-  "name": {},
-  "size": {},
-  "type": {},
-  "time": {},
-  "ext": {}
-}
+{"category": {"text": ["./documents/test.txt", "./documents/text2.txt"], "image": ["./documents/image.png"]}, "content": {"test": [{"filePath": "./documents/test.txt", "occurrences": 1}], "file": [{"filePath": "./documents/test.txt", "occurrences": 1}], "image": [{"filePath": "./documents/text2.txt", "occurrences": 1}], "best": [{"filePath": "./documents/image.png", "occurrences": 1}], "times": [{"filePath": "./documents/image.png", "occurrences": 2}], "worst": [{"filePath": "./documents/image.png", "occurrences": 1}], "age": [{"filePath": "./documents/image.png", "occurrences": 2}], "wisdom": [{"filePath": "./documents/image.png", "occurrences": 1}], "foolishness": [{"filePath": "./documents/image.png", "occurrences": 1}]}, "date": {"2023-12-12": ["./documents/test.txt", "./documents/text2.txt", "./documents/image.png"]}, "keywords": {"text": ["./documents/test.txt"], "nader": ["./documents/text2.txt", "./documents/image.png"]}, "language": {"en": ["./documents/test.txt", "./documents/text2.txt", "./documents/image.png"]}, "name": {"test": ["./documents/test.txt"], "text2": ["./documents/text2.txt"], "image": ["./documents/image.png"]}, "size": {"21": ["./documents/test.txt"], "17": ["./documents/text2.txt"], "109894": ["./documents/image.png"]}, "type": {"text/plain": ["./documents/test.txt", "./documents/text2.txt"], "image/png": ["./documents/image.png"]}, "time": {"22:54:59": ["./documents/test.txt"], "22:55:13": ["./documents/text2.txt"], "22:55:27": ["./documents/image.png"]}, "ext": {"txt": ["./documents/test.txt", "./documents/text2.txt"], "png": ["./documents/image.png"]}}

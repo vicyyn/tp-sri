@@ -67,12 +67,12 @@ def indexes():
 
 @app.route('/search', methods=['POST'])
 def search_docs():
-    query = request.form.get('query')
-    transformed_query = query_evaluator.filter_index(query, index_manager.dataIndex)
-    # If transformed_query is already a list of file paths, no need for list comprehension
-    paths = list(set(transformed_query))
-    # Fetch documents from the database whose paths are in the transformed_query
-    return jsonify([Document.to_json(document) for document in Document.query.filter(Document.path.in_(paths)).all()])
+  query = request.form.get('query')
+  transformed_query = query_evaluator.apply_index_filter(query, index_manager.dataIndex)
+  # If transformed_query is already a list of file paths, no need for list comprehension
+  paths = list(set(transformed_query))
+  # Fetch documents from the database whose paths are in the transformed_query
+  return jsonify([Document.to_json(document) for document in Document.query.filter(Document.path.in_(paths)).all()])
 
 @app.route('/indexes', methods=['POST'])
 def updateIndex():
