@@ -1,35 +1,71 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { LinkContainer } from "react-router-bootstrap";
+import { useRoutes } from "react-router-dom";
+import Indexes from "./indexes";
+import SearchEngine from "./Search";
+import { useDispatch } from "./Thunk";
+import { useEffect } from "react";
+import { dispatchDocuments, dispatchIndexes } from "./Reducer";
+import { toast } from "react-toastify";
+import { API_PATH } from "./Consts";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const content = useRoutes([
+    {
+      path: "",
+      element: <Indexes />,
+    },
+    {
+      path: "search-engine",
+      element: <SearchEngine />,
+    },
+  ]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async function () {
+      let response = await fetch(`${API_PATH}/indexes`);
+      if (response.ok) {
+        const indexes = await response.json();
+        dispatch(dispatchIndexes(indexes));
+      } else {
+        toast("An Error has occured", { type: "error", autoClose: 2000 });
+      }
+
+      response = await fetch(`${API_PATH}/documents`);
+      if (response.ok) {
+        const documents = await response.json();
+        dispatch(dispatchDocuments(documents));
+      } else {
+        toast("An Error has occured", { type: "error", autoClose: 2000 });
+      }
+    })();
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navbar expand="lg" style={{ backgroundColor: "#e3f2fd" }}>
+        <Container>
+          <Navbar.Brand>TP SRI</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse>
+            <Nav className="me-auto">
+              <LinkContainer to="">
+                <Nav.Link>Indexes</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/search-engine">
+                <Nav.Link>Search Engine</Nav.Link>
+              </LinkContainer>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
+      <Container>{content}</Container>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

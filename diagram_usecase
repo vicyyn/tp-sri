@@ -1,5 +1,0 @@
-graph LR
-    D(Actor) --> E{View}
-    D(Actor) --> F{Index}
-    D(Actor) --> G{Evaluate}
-    D(Actor) --> H{Search}
